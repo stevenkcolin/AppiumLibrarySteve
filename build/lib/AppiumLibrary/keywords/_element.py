@@ -27,9 +27,9 @@ class _ElementKeywords(KeywordGroup):
         """
         self._info("Get Name '%s'." % locator)
         element = self._element_find(locator, True, True)
-        return element.get_attribute("name").strip()        
-    
-    
+        return element.get_attribute("name").strip()
+
+
     def get_text(self,locator):
         """get text of element identified by `locator`.
         get text of the element
@@ -49,7 +49,7 @@ class _ElementKeywords(KeywordGroup):
         self._info("Get Id '%s'." % locator)
         element = self._element_find(locator, True, True)
         return element.get_attribute("resourceId").strip()
-    
+
     def get_classname(self,locator):
         """get text of element identified by `locator`.
         get text of the element
@@ -59,7 +59,7 @@ class _ElementKeywords(KeywordGroup):
         self._info("Get ClassName '%s'." % locator)
         element = self._element_find(locator, True, True)
         return element.get_attribute("className").strip()
-        
+
     def get_checkable(self,locator):
         """get value of element identified by `locator`.
         get value of the element
@@ -78,8 +78,8 @@ class _ElementKeywords(KeywordGroup):
         """
         self._info("Get checked '%s'." % locator)
         element = self._element_find(locator, True, True)
-        return element.get_attribute("checked")    
-    
+        return element.get_attribute("checked")
+
     def get_clickable(self,locator):
         """get value of element identified by `locator`.
         get value of the element
@@ -88,7 +88,7 @@ class _ElementKeywords(KeywordGroup):
         """
         self._info("Get clickable '%s'." % locator)
         element = self._element_find(locator, True, True)
-        return element.get_attribute("clickable")    
+        return element.get_attribute("clickable")
 
     def get_enabled(self,locator):
         """get value of element identified by `locator`.
@@ -119,7 +119,7 @@ class _ElementKeywords(KeywordGroup):
         self._info("Get focused '%s'." % locator)
         element = self._element_find(locator, True, True)
         return element.get_attribute("focused")
-    
+
     def get_scrollable(self,locator):
         """get value of element identified by `locator`.
         get value of the element
@@ -146,14 +146,18 @@ class _ElementKeywords(KeywordGroup):
         Key attributes for arbitrary elements are `index` and `name`. See
         `introduction` for details about locating elements.
         """
-        self._info("Get Window Width & Height")   
+        self._info("Get Window Width & Height")
         driver = self._current_application()
 
         window_size = driver.get_window_size()
         width = window_size['width']
         height = window_size['height']
-        
-        return width,height     
+
+        return width,height
+
+    def test_dev_branch(self):
+        str = 'dev branch'
+        return str
 
     def get_swipe_start_end(self,x,y,args='up'):
 
@@ -162,16 +166,16 @@ class _ElementKeywords(KeywordGroup):
         window_size = driver.get_window_size()
         width = window_size['width']
         height = window_size['height']
-        
+
         if args == 'up':
             startX = int(width)/2
             endX = int(width)/2
             startY = int(height)*(int(x)+1)/int(y)
             endY = int(height)/int(y)
             duration=1000
-            self._info("Swipe '%s'." % args)   
+            self._info("Swipe '%s'." % args)
             self._info("Swipe from '%s', '%s' to '%s', '%s'" % (startX, startY, endX, endY))
-            
+
             driver = self._current_application()
             driver.swipe(startX, startY, endX, endY, duration)
         elif args == 'down':
@@ -180,20 +184,20 @@ class _ElementKeywords(KeywordGroup):
             endY = int(height)*(int(x)+1)/int(y)
             startY = int(height)/int(y)
             duration=1000
-            self._info("Swipe '%s'." % args)   
-            self._info("Swipe from '%s', '%s' to '%s', '%s'" % (startX, startY, endX, endY))          
-            
+            self._info("Swipe '%s'." % args)
+            self._info("Swipe from '%s', '%s' to '%s', '%s'" % (startX, startY, endX, endY))
+
             driver = self._current_application()
-            driver.swipe(startX, startY, endX, endY, duration)            
-            
-        
+            driver.swipe(startX, startY, endX, endY, duration)
+
+
         #return startX,startY,endX,endY
 
 
 
 
-        
-    
+
+
     def get_bounds(self,locator):
         """get bounds of element identified by `locator`.
         get bounds of the element
@@ -202,18 +206,18 @@ class _ElementKeywords(KeywordGroup):
         """
         self._info("Get Bounds '%s'." % locator)
         element = self._element_find(locator, True, True)
-        
+
         location = element.location
         size = element.size
-        
+
         startX = location["x"]
         startY = location["y"]
         endX = startX+size["width"]
         endY = startY+size["height"]
-        
+
         return startX,startY,endX,endY
 
-    
+
     def click_element(self, locator):
         """Click element identified by `locator`.
 
@@ -221,7 +225,7 @@ class _ElementKeywords(KeywordGroup):
         `introduction` for details about locating elements.
         """
         self._info("Clicking element '%s'." % locator)
-        self._element_find(locator, True, True).click()        
+        self._element_find(locator, True, True).click()
 
     def click_button(self, index_or_name):
         """ Click button """
@@ -303,11 +307,11 @@ class _ElementKeywords(KeywordGroup):
         If this keyword fails, it automatically logs the page source
         using the log level specified with the optional `loglevel` argument.
         Givin
-        """        
+        """
         if not self._is_element_present(locator):
             self.log_source(loglevel)
             raise AssertionError("Page should have contained element '%s' "
-                                 "but did not" % locator)            
+                                 "but did not" % locator)
         self._info("Current page contains element '%s'." % locator)
 
     def page_should_not_contain_element(self, locator, loglevel='INFO'):
@@ -316,35 +320,35 @@ class _ElementKeywords(KeywordGroup):
         If this keyword fails, it automatically logs the page source
         using the log level specified with the optional `loglevel` argument.
         Givin
-        """   
+        """
         if self._is_element_present(locator):
             self.log_source(loglevel)
             raise AssertionError("Page should not have contained element '%s' "
-                                 "but did not" % locator)            
+                                 "but did not" % locator)
         self._info("Current page not contains element '%s'." % locator)
 
     def element_should_be_disabled(self, locator, loglevel='INFO'):
         """Verifies that element identified with locator is disabled.
 
         Key attributes for arbitrary elements are `id` and `name`. See
-        `introduction` for details about locating elements.        
+        `introduction` for details about locating elements.
         """
         if self._element_find(locator, True, True).is_enabled():
             self.log_source(loglevel)
             raise AssertionError("Element '%s' should be disabled "
-                                 "but did not" % locator)      
+                                 "but did not" % locator)
         self._info("Element '%s' is disabled ." % locator)
 
     def element_should_be_enabled(self, locator, loglevel='INFO'):
         """Verifies that element identified with locator is enabled.
 
         Key attributes for arbitrary elements are `id` and `name`. See
-        `introduction` for details about locating elements.        
+        `introduction` for details about locating elements.
         """
         if not self._element_find(locator, True, True).is_enabled():
             self.log_source(loglevel)
             raise AssertionError("Element '%s' should be enabled "
-                                 "but did not" % locator)      
+                                 "but did not" % locator)
         self._info("Element '%s' is enabled ." % locator)
 
 
@@ -352,12 +356,12 @@ class _ElementKeywords(KeywordGroup):
         element = self._element_find(locator, True, True)
         if expected != element.get_attribute('name'):
             raise AssertionError("Element '%s' name should be '%s' "
-                                 "but it is '%s'." % (locator, expected, element.get_attribute('name'))) 
+                                 "but it is '%s'." % (locator, expected, element.get_attribute('name')))
         self._info("Element '%s' name is '%s' " % (locator, expected))
 
 
     # Private
-    
+
     def _is_index(self, index_or_name):
         if index_or_name.startswith('index='):
             return True
@@ -370,7 +374,7 @@ class _ElementKeywords(KeywordGroup):
             element = driver.find_element_by_name(name)
         except Exception, e:
             raise Exception, e
-    
+
         try:
             element.click()
         except Exception, e:
@@ -383,7 +387,7 @@ class _ElementKeywords(KeywordGroup):
 
     def _find_element_by_class_name(self, class_name, index_or_name):
         elements = self._find_elements_by_class_name(class_name)
-    
+
         if self._is_index(index_or_name):
             try:
                 index = int(index_or_name.split('=')[-1])
@@ -403,7 +407,7 @@ class _ElementKeywords(KeywordGroup):
         return element
 
     def _get_class(self, platform_class_dict):
-        return platform_class_dict.get(self._get_platform())        
+        return platform_class_dict.get(self._get_platform())
 
     def _is_support_platform(self, platform_class_dict):
         return platform_class_dict.has_key(self._get_platform())
