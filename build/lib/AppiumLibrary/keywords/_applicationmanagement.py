@@ -37,7 +37,7 @@ class _ApplicationManagementKeywords(KeywordGroup):
 
     def open_application(self, remote_url, alias=None,  **kwargs):
         """Opens a new application to given Appium server.
-        Capabilities of appium server, Android and iOS, 
+        Capabilities of appium server, Android and iOS,
         Please check http://appium.io/slate/en/master/?python#appium-server-capabilities
         | *Option*            | *Man.* | *Description*     |
         | remote_url          | Yes    | Appium server url |
@@ -50,7 +50,7 @@ class _ApplicationManagementKeywords(KeywordGroup):
         desired_caps = kwargs
         application = webdriver.Remote(str(remote_url), desired_caps)
         self._debug('Opened application with session id %s' % application.session_id)
-        
+
         return self._cache.register(application, alias)
 
     def switch_application(self, index_or_alias):
@@ -96,7 +96,7 @@ class _ApplicationManagementKeywords(KeywordGroup):
 
     def get_source(self):
         """Returns the entire source of the current page."""
-        return self._current_application().page_source    
+        return self._current_application().page_source
 
     def log_source(self, loglevel='INFO'):
         """Logs and returns the entire html source of the current page or frame.
@@ -143,11 +143,11 @@ class _ApplicationManagementKeywords(KeywordGroup):
     def switch_to_context(self, context_name):
         """Switch to a new context"""
         self._current_application().switch_to.context(context_name)
-        
+
     def go_to_url(self, url):
         """
-        Opens URL in default web browser. 
-        
+        Opens URL in default web browser.
+
         Example:
         | Open Application  | http://localhost:4755/wd/hub | platformName=iOS | platformVersion=7.0 | deviceName='iPhone Simulator' | browserName=Safari |
         | Go To URL         | http://m.webapp.com          |

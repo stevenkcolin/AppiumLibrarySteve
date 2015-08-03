@@ -300,8 +300,8 @@ class _ElementKeywords(KeywordGroup):
         str = 'master branch'
         return str
 
-    def test_return_0803(self):
-        str = 'return 0803'
+    def test_return_0803002(self):
+        str = 'return 0803002'
         return str
 
     def get_swipe_start_end(self,x,y,args='up'):
