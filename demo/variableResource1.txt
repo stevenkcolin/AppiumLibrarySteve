@@ -1,0 +1,11 @@
+*** Variables ***
+@{userName}       test1    test2    test3    test4    test5    test6    test7
+${validuser1}     test8
+${invaliduser1}    test!!
+@{buttonId}       ViewTest    ButtonTest    EditTextTest    BarTest    ListViewTest    PickerTest
+@{logmsg1}        ViewTest    1    ButtonTest    1    EditTextTest    2    BarTest
+...               2    ListViewTest    3    PickerTest    3
+
+*** Keywords ***
+log test
+    log    333333333

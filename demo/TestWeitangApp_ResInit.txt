@@ -1,0 +1,52 @@
+*** Settings ***
+Library           AppiumLibrary    run_on_failure=Log Source
+Resource          TestWeitangApp_ResControlVar.txt
+Resource          TestWeitangApp_ResTestData.txt
+Library           Selenium2Library
+
+*** Variables ***
+${REMOTE_URL}     http://localhost:4723/wd/hub
+
+*** Keywords ***
+StartupWeitang
+    [Documentation]    StartupWeitang
+    Open Application    ${REMOTE_URL}    platformName=Android    platformVersion=4.4.4    deviceName=Android Emulator    app=/Users/linchen/code/welltang_patient-baiduAs-release.apk
+    AppiumLibrary.Capture Page Screenshot
+
+LoginWeitang
+    sleep    5
+    AppiumLibrary.Wait Until Page Contains Element    id=${btn_shouye_login}    30
+    Click Element    id=${btn_shouye_login}
+    AppiumLibrary.Wait Until Page Contains Element    id = ${edt_login_username}    30
+    click element    id = ${edt_login_username}
+    Input Text    id = ${edt_login_username}    ${validUserName}
+    click element    id = ${edt_login_userpsw}
+    Input Text    id = ${edt_login_userpsw}    ${validUserPsw}
+    sleep    2
+    Hide Keyboard
+    click element    id = ${btn_login_login}
+    wait until page contains element    id = ${btn_welcome_label}    30
+    swipe    500    1480    500    400
+    swipe    500    1480    500    400
+    swipe    500    1480    500    400
+    swipe    500    1480    500    400
+    click element    id = ${btn_welcome_enterweitang}
+    click element    id = ${btn_image_gift_center}
+
+UpdateBloodSugar
+    [Arguments]    ${input_comments}    ${input_sugar}
+    sleep    5
+    click element    id = ${btn_xuetang_addsugar}
+    input text    id = ${btn_addbloodsugar_comments}    ${input_comments}
+    sleep    2
+    Hide Keyboard
+    sleep    2
+    : FOR    ${index}    IN RANGE    20
+    \    swipe    700    500    500    500
+    \    ${attr}=    Get Element Attribute    ${btn_addbloodsugar_txt_value}    text
+    sleep    2
+    click element    id = ${btn_addbloodsugar_save}
+    click element    id = ${btn_addbloodsugar_iknow}
+
+CheckBloodSugar
+    [Arguments]    ${input1}    ${input2}    ${input3}

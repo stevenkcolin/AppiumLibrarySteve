@@ -1,0 +1,20 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          Test_Webbrowser_res_1.txt
+
+*** Keywords ***
+initial proc
+    log    test setup
+
+tear down proc
+    log    test tear down
+    Close All Browsers
+
+test_baidu1
+    [Arguments]    ${searchContent}    ${url}
+    打开浏览器    ${url}
+    输入搜索内容    ${searchContent}
+    点击搜索按钮
+    获得title名称，并检查页面是否存在搜索内容    ${searchContent}
+    关闭浏览器
+    log    1

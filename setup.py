@@ -8,22 +8,17 @@ from ez_setup import use_setuptools
 use_setuptools()
 from setuptools import setup
 
-execfile(join(dirname(__file__), 'src', 'Selenium2Library', 'version.py'))
+execfile(join(dirname(__file__), 'src', 'AppiumLibrary', 'version.py'))
 
-DESCRIPTION = """
-Selenium2Library is a web testing library for Robot Framework
-that leverages the Selenium 2 (WebDriver) libraries.
-"""[1:-1]
-
-setup(name         = 'robotframework-selenium2library',
+setup(name         = 'robotframework-appiumlibrary',
       version      = VERSION,
-      description  = 'Web testing library for Robot Framework',
-      long_description = DESCRIPTION,
-      author       = 'Ryan Tomac , Ed Manlove , Jeremy Johnson',
-      author_email = '<ryan@tomacfamily.com> ,  <devPyPlTw@verizon.net> ,  <jeremy@softworks.com.my>',
-      url          = 'https://github.com/rtomac/robotframework-selenium2library',
+      description  = 'app testing library for Robot Framework',
+      long_description = open(join(dirname(__file__), 'README.rst')).read(),
+      author       = 'William Zhang, Xie Lieping',
+      author_email = '<jollychang@gmail.com>, <frankbp@gmail.com>',
+      url          = 'https://github.com/jollychang/robotframework-appiumlibrary',
       license      = 'Apache License 2.0',
-      keywords     = 'robotframework testing testautomation selenium selenium2 webdriver web',
+      keywords     = 'robotframework testing testautomation mobile appium webdriver app',
       platforms    = 'any',
       classifiers  = [
                         "Development Status :: 5 - Production/Stable",
@@ -33,14 +28,19 @@ setup(name         = 'robotframework-selenium2library',
                         "Topic :: Software Development :: Testing"
                      ],
       install_requires = [
-							'decorator >= 3.3.2',
-							'selenium >= 2.32.0',
-							'robotframework >= 2.6.0',
-							'docutils >= 0.8.1'
-						 ],
+                            'decorator >= 3.3.2',
+                            'robotframework >= 2.6.0, <= 2.8.7',
+                            'docutils >= 0.8.1',
+                            'Appium-Python-Client >= 0.5',
+                            'mock >= 1.0.1',
+                            'sauceclient >= 0.1.0',
+                            'pytest-cov >= 1.8.1',
+                            'pytest-xdist >= 1.11',
+                            'pytest-pythonpath >= 0.4',
+                         ],
       py_modules=['ez_setup'],
       package_dir  = {'' : 'src'},
-      packages     = ['Selenium2Library','Selenium2Library.keywords','Selenium2Library.locators',
-                      'Selenium2Library.utils'],
+      packages     = ['AppiumLibrary','AppiumLibrary.keywords','AppiumLibrary.locators',
+                      'AppiumLibrary.utils'],
       include_package_data = True,
       )

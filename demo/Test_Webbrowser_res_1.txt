@@ -1,0 +1,23 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Keywords ***
+打开浏览器
+    [Arguments]    ${input1}
+    Open Browser    ${input1}
+
+输入搜索内容
+    [Arguments]    ${input1}
+    Input Text    id=kw    ${input1}
+
+点击搜索按钮
+    Click Button    su
+
+获得title名称，并检查页面是否存在搜索内容
+    [Arguments]    ${input1}
+    Wait Until Page Contains    ${input1}
+    ${title}    Get Source
+    Should Contain    ${title}    ${input1}
+
+关闭浏览器
+    Close All Browsers
