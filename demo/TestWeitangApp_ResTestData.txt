@@ -1,5 +1,0 @@
-*** Variables ***
-${validUserName}    14044440068
-${validUserPsw}    123456
-${bloodsugar_comments}    comments1111
-${bloodsugar_value}    12
