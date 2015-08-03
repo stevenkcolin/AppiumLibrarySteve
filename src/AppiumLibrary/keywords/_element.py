@@ -159,6 +159,10 @@ class _ElementKeywords(KeywordGroup):
         str = 'dev branch'
         return str
 
+    def test_master_branch(self):
+        str = 'master branch'
+        return str
+
     def get_swipe_start_end(self,x,y,args='up'):
 
         driver = self._current_application()
