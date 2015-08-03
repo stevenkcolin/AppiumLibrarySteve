@@ -1,0 +1,31 @@
+*** Settings ***
+Documentation     demo for appium library
+Force Tags        demo
+Resource          /Users/linchen/robotframework-appiumlibrary/demo/demo_resoure.txt
+
+*** Test Cases ***
+test_demo
+    [Tags]    regression
+    Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=4.2.2    deviceName=192.168.56.101:5555    app=${CURDIR}/demoapp/OrangeDemoApp.apk    automationName=appium
+    ...    appPackage=com.netease.qa.orangedemo    appActivity=MainActivity
+    Click Element    name=ViewTest
+    Capture Page Screenshot
+    Press Keycode    keycode=4
+    Click Element    name=ButtonTest
+    Capture Page Screenshot
+    Press Keycode    keycode=4
+    Click Element    name=EditTextTest
+    Capture Page Screenshot
+    Press Keycode    keycode=4
+    Click Element    name=BarTest
+    Capture Page Screenshot
+    Press Keycode    keycode=4
+    Click Element    name=ListViewTest
+    Capture Page Screenshot
+    Press Keycode    keycode=4
+    Click Element    name=PickerTest
+    Capture Page Screenshot
+    Press Keycode    keycode=4
+
+*** Keywords ***
+test_arg1

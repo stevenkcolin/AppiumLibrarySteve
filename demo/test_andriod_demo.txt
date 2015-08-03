@@ -1,0 +1,99 @@
+*** Settings ***
+Documentation     demo for appium library
+Force Tags        demo
+Resource          /Users/linchen/robotframework-appiumlibrary/demo/demo_resoure.txt
+Resource          variableResource1.txt
+
+*** Test Cases ***
+test_demo
+    [Tags]    regression
+    Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=4.2.2    deviceName=192.168.56.101:5555    app=${CURDIR}/demoapp/OrangeDemoApp.apk    automationName=appium
+    ...    appPackage=com.netease.qa.orangedemo    appActivity=MainActivity
+    Click Element    name=ViewTest
+    Capture Page Screenshot
+    Press Keycode    keycode=4
+    #Click Element    name=ButtonTest
+    #Capture Page Screenshot
+    #Press Keycode    keycode=4
+    #Click Element    name=EditTextTest
+    #Capture Page Screenshot
+    #Press Keycode    keycode=4
+    #Click Element    name=BarTest
+    #Capture Page Screenshot
+    #Press Keycode    keycode=4
+    #Click Element    name=ListViewTest
+    #Capture Page Screenshot
+    #Press Keycode    keycode=4
+    #Click Element    name=PickerTest
+    #Capture Page Screenshot
+    #Press Keycode    keycode=4
+
+test_case_startup
+    TestStart
+
+test_case_clickAllButton
+    [Template]    testClickButton
+    : FOR    ${input1}    ${input2}    IN    @{logmsg1}
+    \    ${input1}    ${input2}
+
+test_case1
+    [Documentation]    测试for，if
+    ...    测试通过资源文件引入变量和参数
+    [Tags]    regression    bvt
+    Set Screenshot Directory    /Users/linchen
+    #Capture Page Screenshot
+    @{var}    set variable    a    b    c
+    #测试基本循环方式
+    : FOR    ${INDEX}    IN RANGE    2
+    \    Log    ${INDEX}
+    \    #Capture Page Screenshot
+    \    run keyword if    ${INDEX}==10    Exit for loop
+    Log    outside loop
+    #测试用重复keyword方式
+    Repeat Keyword    3    testkeyword1
+    #测试引入resource文件中的变量
+    : FOR    ${INDEX}    IN    @{userName}
+    \    Log    ${INDEX}
+    \    run keyword if    '${INDEX}' == 'test5'    exit for loop
+    #测试引入resource文件后的scalar
+    run keyword if    '${validuser1}' in @{userName}    testkeyword1
+    ...    ELSE    testKeyword2
+    run keyword if    '${invaliduser1}' in @{userName}    testkeyword2
+    ...    ELSE    TESTkeyword1
+    #测试testkey_template
+
+test_case2
+    [Documentation]    测试数据驱动
+    [Tags]    smoke
+    [Template]    Test System
+    3    4    7    # Test Case 1
+    45    55    100    # Test Case 2
+    35    5    40    # Test Case 3
+    5    5    10    # Test Case 4
+
+*** Keywords ***
+testkeyword1
+    log    pass
+    testkeyword2
+
+testkeyword2
+    log    fail
+
+Test System
+    [Arguments]    ${input_1}    ${input_2}    ${expected}
+    ${result}=    Do something complicated    ${input_1}    ${input_2}
+    Run Keyword If    '${result}'!='${expected}'    fail    There is a problem
+
+Do something complicated
+    [Arguments]    ${input_1}    ${input_2}
+    ${result}=    Evaluate    ${input_1}+${input_2}
+    log test
+    [Return]    ${result}
+
+testClickButton
+    [Arguments]    ${input_1}    ${input_2}
+    Click Element    name=${input_1}
+    log    ${input_1}
+    log    ${input_2}
+    #Capture Page Screenshot
+    Press Keycode    keycode=4

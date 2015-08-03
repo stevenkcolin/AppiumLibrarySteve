@@ -1,36 +1,18 @@
-Selenium 2 (WebDriver) library for Robot Framework
+Appium library for RobotFramework
 ==================================================
-
-.. image:: https://api.travis-ci.org/rtomac/robotframework-selenium2library.png
-    :target: http://travis-ci.org/rtomac/robotframework-selenium2library
-
-.. image:: https://img.shields.io/pypi/v/robotframework-selenium2library.svg
-    :target: https://pypi.python.org/pypi/robotframework-selenium2library
-
-.. image:: https://img.shields.io/pypi/dm/robotframework-selenium2library.svg
-    :target: https://pypi.python.org/pypi/robotframework-selenium2library
-
-.. image:: https://img.shields.io/pypi/l/robotframework-selenium2library.svg
-    :target: http://www.apache.org/licenses/LICENSE-2.0
-
-.. image:: https://robotframework-slack.herokuapp.com/badge.svg
-	:target: https://robotframework-slack.herokuapp.com
-	:alt: Slack channel
-
 
 Introduction
 ------------
 
-Selenium2Library is a web testing library for `Robot Framework`_
-that leverages the `Selenium 2 (WebDriver)`_ libraries from the
-Selenium_ project.
+AppiumLibrary is an appium testing library for `RobotFramework <http://code.google.com/p/robotframework/>`_.
 
-It is modeled after (and forked from) the SeleniumLibrary_ library,
-but re-implemented to use Selenium 2 and WebDriver technologies.
+It uses `Appium <http://appium.io/>`_ (version 1.x) to communicate with Android and iOS application 
+similar to how `Selenium WebDriver <http://seleniumhq.org/projects/webdriver/>`_ talks
+to web browser.
 
-- More information about this library can be found on the Wiki_ and in the `Keyword Documentation`_.
-- Installation information is found in the `INSTALL.rst`_ file.
-- Developer information is found in `BUILD.rst`_ file.
+AppiumLibrary is modeled after (and forked from)  `appiumandroidlibrary <https://github.com/frankbp/robotframework-appiumandroidlibrary>`_,  but re-implemented to use appium 1.X technologies.   
+
+It support Python 2.x only.
 
 
 Installation
@@ -42,73 +24,25 @@ Using ``pip``
 The recommended installation method is using
 `pip <http://pip-installer.org>`__::
 
-    pip install robotframework-selenium2library
+    pip install robotframework-appiumlibrary
 
-The main benefit of using ``pip`` is that it automatically installs all
-dependencies needed by the library. Other nice features are easy upgrading
-and support for un-installation::
+Using ``setup.py``
+''''''''''''''''''
 
-    pip install --upgrade robotframework-selenium2library
-    pip uninstall robotframework-selenium2library
+setup.py
 
-Notice that using ``--upgrade`` above updates both the library and all
-its dependencies to the latest version. If you want, you can also install
-a specific version or upgrade only the Selenium tool used by the library::
+::
 
-    pip install robotframework-selenium2library==1.4.1
-    pip install --upgrade selenium
-    pip install selenium==2.34
+    git clone https://github.com/jollychang/robotframework-appiumlibrary.git
+    cd robotframework-appiumlibrary
+    python setup.py install
 
-Proxy configuration
-'''''''''''''''''''
-
-If you are behind a proxy, you can use ``--proxy`` command line option
-or set ``http_proxy`` and/or ``https_proxy`` environment variables to
-configure ``pip`` to use it. If you are behind an authenticating NTLM proxy,
-you may want to consider installing `CNTML <http://cntlm.sourceforge.net>`__
-to handle communicating with it.
-
-For more information about ``--proxy`` option and using pip with proxies
-in general see:
-
-- http://pip-installer.org/en/latest/usage.html
-- http://stackoverflow.com/questions/9698557/how-to-use-pip-on-windows-behind-an-authenticating-proxy
-- http://stackoverflow.com/questions/14149422/using-pip-behind-a-proxy
-
-Manual installation
-'''''''''''''''''''
-
-If you do not have network connection or cannot make proxy to work, you need
-to resort to manual installation. This requires installing both the library
-and its dependencies yourself.
-
-1) Make sure you have `Robot Framework installed
-   <http://code.google.com/p/robotframework/wiki/Installation>`__.
-
-2) Download source distributions (``*.tar.gz``) for the library and its
-   dependencies:
-
-   - https://pypi.python.org/pypi/robotframework-selenium2library
-   - https://pypi.python.org/pypi/selenium
-   - https://pypi.python.org/pypi/decorator
-
-3) Extract each source distribution to a temporary location.
-
-4) Go each created directory from the command line and install each project
-   using::
-
-       python setup.py install
-
-If you are on Windows, and there are Windows installers available for
-certain projects, you can use them instead of source distributions.
-Just download 32bit or 64bit installer depending on your system,
-double-click it, and follow the instructions.
 
 Directory Layout
 ----------------
 
 demo/
-    A simple demonstration, with an application running on localhost
+    A simple demonstration, with an Android application and RF test suite
 
 doc/
     Keyword documentation
@@ -120,38 +54,35 @@ src/
 Usage
 -----
 
-To write tests with Robot Framework and Selenium2Library,
-Selenium2Library must be imported into your Robot test suite.
-See `Robot Framework User Guide`_ for more information.
+To write tests with Robot Framework and AppiumLibrary, 
+AppiumLibrary must be imported into your RF test suite.
+See `Robot Framework User Guide <https://code.google.com/p/robotframework/wiki/UserGuide>`_ 
+for more information.
+
+As it uses Appium make sure your Appium server is up and running.
+For how to use Appium please refer to `Appium Documentation <http://appium.io/getting-started.html>`_
+
+Documentation
+-------------
+
+The keyword documentation could be found at `Keyword Documentation 
+<http://jollychang.github.io/robotframework-appiumlibrary/doc/AppimuLibrary.html>`_
+
+Contributing
+-------------
+Fork the project, make a change, and send a pull request!
 
 
-Running the Demo
-----------------
+.. image:: https://pypip.in/v/robotframework-appiumlibrary/badge.png
+    :target: https://pypi.python.org/pypi/robotframework-appiumlibrary/
+    :alt: Latest PyPI version
 
-The demo directory contains an easily executable demo for Robot Framework
-using Selenium2Library. To run the demo, run::
+.. image:: https://travis-ci.org/jollychang/robotframework-appiumlibrary.svg?branch=master
+    :target: https://travis-ci.org/jollychang/robotframework-appiumlibrary
 
-    python demo/rundemo.py
+.. image:: https://pypip.in/d/robotframework-appiumlibrary/badge.png
+    :target: https://pypi.python.org/pypi/robotframework-appiumlibrary/
+    :alt: Number of PyPI downloads
 
-E.g.::
-
-	python demo/rundemo.py demo/login_tests
-
-Getting Help
-------------
-The `user group for Robot Framework`_ is the best place to get help. Consider including in the post:
-
-- Full description of what you are trying to do and expected outcome
-- Version number of Selenium2Library, Robot Framework, and Selenium
-- Traceback or other debug output containing error information
-
-.. _Robot Framework: http://robotframework.org
-.. _Selenium: http://selenium.openqa.org
-.. _Selenium 2 (WebDriver): http://seleniumhq.org/docs/03_webdriver.html
-.. _SeleniumLibrary: http://code.google.com/p/robotframework-seleniumlibrary/
-.. _Wiki: https://github.com/rtomac/robotframework-selenium2library/wiki
-.. _Keyword Documentation: http://rtomac.github.com/robotframework-selenium2library/doc/Selenium2Library.html
-.. _INSTALL.rst: https://github.com/rtomac/robotframework-selenium2library/blob/master/INSTALL.rst
-.. _BUILD.rst: https://github.com/rtomac/robotframework-selenium2library/blob/master/BUILD.rst
-.. _Robot Framework User Guide: http://code.google.com/p/robotframework/wiki/UserGuide
-.. _user group for Robot Framework: http://groups.google.com/group/robotframework-users
+.. image:: https://pledgie.com/campaigns/25326.png
+    :target: https://pledgie.com/campaigns/25326
